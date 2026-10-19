@@ -4,6 +4,7 @@ import "./TitleBar.css"
 import DropDownButton from "../DropDownButton";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { MobileMenuButton, MobileMembersButton } from "../../context/MobileNav";
 
 function TitleBar({ title, users }) {
     const { serverId, conversationId } = useParams();
@@ -38,6 +39,7 @@ function TitleBar({ title, users }) {
 
     return (
         <div className="top-bar">
+            <MobileMenuButton />
             <DropDownButton serverId={serverId} title={title} users={users} />
             <div id="channel-top-title">
                 {conversation ? (<FallbackImage alt="" className="title-profile-img" src={conversation.userIcon} name={conversation.username}
@@ -46,6 +48,7 @@ function TitleBar({ title, users }) {
                 />) : <i className="fa-solid fa-hashtag title-icon"></i>}
                 <h1 className="top-title">{header}</h1>
             </div>
+            <MobileMembersButton />
         </div>
     )
 }

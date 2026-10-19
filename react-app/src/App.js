@@ -14,6 +14,7 @@ import LogoutNav from "./components/LogoutNav";
 import DeveloperList from "./components/DeveloperList"
 import AllServersList from "./components/AllServersList";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import { MobileNavProvider } from "./context/MobileNav";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function App() {
   return (
     <>
       {isLoaded && (
-        <>
+        <MobileNavProvider>
           {/* <Navigation isLoaded={isLoaded} /> */}
           {/* <TitleBar /> */}
 
@@ -70,7 +71,7 @@ function App() {
               <Redirect to='/home' />
             </Route>
           </Switch>
-        </>
+        </MobileNavProvider>
       )}
     </>
   );

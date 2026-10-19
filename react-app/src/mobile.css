@@ -1,0 +1,510 @@
+/* Phone layout, Discord-mobile style. Loaded last so it can override component styles.
+   Desktop is untouched: everything except the hidden mobile-only controls lives in the media query. */
+
+.app-shell {
+  display: contents;
+}
+
+.mobile-menu-btn,
+.mobile-members-btn,
+.mobile-topbar,
+.mobile-backdrop,
+.mobile-drawer-close {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --rail-w: 72px;
+    --list-w: min(240px, calc(100vw - 72px - 56px));
+    --bar-h: 55px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* iOS zooms into inputs with text under 16px */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  /* ---------- Mobile controls ---------- */
+  .mobile-menu-btn,
+  .mobile-members-btn,
+  .mobile-drawer-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .mobile-menu-btn,
+  .mobile-members-btn {
+    margin: 0 4px;
+  }
+
+  .mobile-menu-btn i,
+  .mobile-members-btn i,
+  .mobile-drawer-close i {
+    font-size: 1.3rem;
+    color: var(--text);
+  }
+
+  .mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .mobile-drawer-close {
+    position: fixed;
+    top: 6px;
+    left: calc(var(--rail-w) + var(--list-w) + 6px);
+    z-index: 41;
+    background-color: var(--left-right-nav);
+  }
+
+  .members-open .mobile-drawer-close {
+    left: 6px;
+  }
+
+  /* ---------- Top bar: hamburger + title + member list button ---------- */
+  .app-shell .top-bar {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: var(--bar-h);
+    margin-left: 0;
+    align-items: center;
+    background-color: var(--center-page);
+    /* no stacking context, so the drawer parts inside it can sit above the backdrop */
+    z-index: auto;
+  }
+
+  .app-shell #channel-top-title {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding-left: 0.25rem;
+  }
+
+  .app-shell .top-title {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1.15rem;
+  }
+
+  .app-shell .mobile-topbar {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: var(--bar-h);
+    color: var(--text);
+    background-color: var(--center-page);
+    box-shadow: var(--left-right-nav) 0.1rem 0.1rem 0.4rem;
+  }
+
+  /* ---------- Left drawer: server rail, server name / DM header, channel or DM list, user panel ---------- */
+  .app-shell .nav-root {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 40;
+  }
+
+  .app-shell .dropdown-title-div,
+  .app-shell .dm-title-div {
+    position: fixed;
+    top: 0;
+    left: var(--rail-w);
+    width: var(--list-w);
+    height: var(--bar-h);
+    z-index: 40;
+  }
+
+  .app-shell #dropdown-container {
+    position: fixed;
+    top: 0;
+    left: calc(var(--rail-w) + var(--list-w));
+    width: 0;
+    height: var(--bar-h);
+    z-index: 41;
+  }
+
+  .app-shell #conversations-container:not(.server-user-list) {
+    position: fixed;
+    top: var(--bar-h);
+    bottom: 60px;
+    left: var(--rail-w);
+    width: var(--list-w);
+    margin: 0;
+    z-index: 40;
+  }
+
+  .app-shell .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: var(--rail-w);
+    width: var(--list-w);
+    gap: 0.25rem;
+    z-index: 40;
+  }
+
+  .app-shell .nav-root,
+  .app-shell .dropdown-title-div,
+  .app-shell .dm-title-div,
+  .app-shell #dropdown-container,
+  .app-shell #conversations-container:not(.server-user-list),
+  .app-shell .bottom-nav {
+    transform: translateX(calc(-1 * (var(--rail-w) + var(--list-w))));
+    visibility: hidden;
+    transition: transform 0.2s ease, visibility 0.2s;
+  }
+
+  .drawer-open .nav-root,
+  .drawer-open .dropdown-title-div,
+  .drawer-open .dm-title-div,
+  .drawer-open #dropdown-container,
+  .drawer-open #conversations-container:not(.server-user-list),
+  .drawer-open .bottom-nav {
+    transform: none;
+    visibility: visible;
+  }
+
+  /* hover tooltips get stuck on touch screens */
+  .app-shell .tooltip:hover::before,
+  .app-shell .tooltip:hover::after {
+    display: none;
+  }
+
+  .app-shell .dm-bar,
+  .app-shell .channel-container,
+  .app-shell .group-container {
+    min-height: 40px;
+  }
+
+  .app-shell .left-nav-bar {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .app-shell .nav-username {
+    width: auto;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .app-shell .nav-button {
+    flex-shrink: 0;
+    width: auto;
+    height: 40px;
+    padding: 0 0.8rem;
+  }
+
+  .app-shell .update-conversation,
+  .app-shell .delete-message-button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  /* ---------- Right panel: member list / developer list, behind the users button ---------- */
+  .app-shell #conversations-container.server-user-list {
+    display: none;
+    position: fixed;
+    top: var(--bar-h);
+    right: 0;
+    bottom: 0;
+    width: var(--list-w);
+    margin: 0;
+    z-index: 40;
+  }
+
+  .members-open #conversations-container.server-user-list {
+    display: flex;
+  }
+
+  .app-shell .coder-link {
+    display: inline-block;
+    padding: 0.6rem 0.2rem;
+  }
+
+  /* ---------- Main content takes the whole screen ---------- */
+  .app-shell .socket-container,
+  .app-shell #list-container,
+  .app-shell #direct-messages-view,
+  .app-shell #explore-container {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    margin: var(--bar-h) 0 0 0;
+  }
+
+  .app-shell #explore-container {
+    margin-top: 0;
+  }
+
+  .app-shell .socket-container {
+    padding: 0.5rem 0.75rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .app-shell .group-messages-buttons {
+    margin: 0.25rem 0;
+    padding: 0.6rem;
+  }
+
+  .app-shell .message-info {
+    min-width: 0;
+  }
+
+  .app-shell .message-user-info {
+    flex-wrap: wrap;
+  }
+
+  .app-shell .message-text {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .app-shell .socket-container img {
+    max-width: 100%;
+  }
+
+  /* Home: server list */
+  .app-shell #list-container {
+    padding: 0.75rem;
+  }
+
+  .app-shell #home-title,
+  .app-shell #new-user-home h1 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .app-shell #server-container {
+    gap: 0.75rem;
+  }
+
+  .app-shell #server-list-icon {
+    width: 3rem;
+    height: 3rem;
+    flex-shrink: 0;
+  }
+
+  .app-shell #server-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .app-shell #server-list-name {
+    overflow-wrap: anywhere;
+  }
+
+  .app-shell #server-list-edge {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .launch-server-button {
+    min-height: 40px;
+  }
+
+  /* Explore */
+  .app-shell .server-discover-banner {
+    margin: 0.75rem;
+  }
+
+  .app-shell #servers-list-container {
+    padding: 0.75rem;
+  }
+
+  .app-shell .server-container {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .app-shell .explore-server-image {
+    width: 100%;
+    max-width: 100%;
+    height: 12rem;
+    object-fit: cover;
+  }
+
+  /* ---------- Modals fit the screen and scroll when tall ---------- */
+  #modal-content {
+    max-width: calc(100vw - 24px);
+    max-height: calc(100% - 24px);
+    overflow-y: auto;
+    border-radius: 20px;
+  }
+
+  #modal-content > div {
+    max-width: 100%;
+    border-radius: 20px;
+  }
+
+  #modal-content #form-container,
+  #modal-content #sign-up-container,
+  #modal-content #create-server-container,
+  #modal-content #delete-form-container {
+    width: calc(100vw - 24px);
+    max-width: 30rem;
+    padding: 1rem;
+  }
+
+  #modal-content .form-title {
+    margin-top: 0.5rem;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  #modal-content .create-server-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  #modal-content .form-box {
+    margin: 0.5rem 0 0;
+    padding: 0.5rem 0;
+  }
+
+  #modal-content .signup-labels {
+    width: 100%;
+    margin-bottom: 1.25rem;
+  }
+
+  #modal-content .input-area {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+  }
+
+  #modal-content #form-button {
+    height: 52px;
+    font-size: 20px;
+  }
+
+  #modal-content .demo-wrapper {
+    margin-top: 0.5rem;
+  }
+
+  #modal-content .demo-users {
+    flex-direction: column;
+    width: 100%;
+    row-gap: 0.5rem;
+  }
+
+  #modal-content .demo-user {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+  }
+
+  #modal-content .demo-top {
+    flex-direction: row;
+    gap: 0.75rem;
+    margin-top: 0;
+  }
+
+  #modal-content .demo-title {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  #modal-content .sign-up-form-server-img {
+    max-width: 100%;
+  }
+
+  #modal-content .delete-warning {
+    width: 100%;
+  }
+
+  #modal-content .delete-server-buttons {
+    flex-wrap: wrap;
+  }
+
+  #modal-content .delete-server-buttons button,
+  #modal-content #update-message-button {
+    min-height: 40px;
+    padding: 0 1rem;
+  }
+
+  #modal-content .edit-message-input-area {
+    width: 100%;
+    height: 10rem;
+  }
+
+  #modal-content .users-list-container {
+    height: 200px;
+  }
+}
+
+/* ---------- Landing page on small phones ---------- */
+@media (max-width: 533px) {
+  #landing-page-root .top-nav {
+    padding: 12px 16px;
+  }
+
+  #landing-page-root li.top-left-nav .fa-gamepad {
+    font-size: 28px;
+  }
+
+  #landing-page-root .discordia-title {
+    font-size: 22px;
+    margin-left: 6px;
+  }
+
+  #landing-page-root li.top-right-nav {
+    gap: 0.5rem;
+  }
+
+  #landing-page-root .login-button,
+  #landing-page-root .sign-up-button {
+    width: auto;
+    height: 40px;
+    padding: 0 1rem;
+    font-size: 14px;
+  }
+
+  /* width: 100% plus margins pushed the text past the right edge */
+  #landing-page-root .body {
+    width: auto;
+    height: auto;
+    margin: 1rem;
+  }
+
+  #landing-page-root .open-discordia {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 309px;
+    height: 48px;
+  }
+
+  #landing-page-root .coder-link {
+    display: inline-block;
+    padding: 0.6rem 0.2rem;
+  }
+}

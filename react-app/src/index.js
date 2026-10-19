@@ -10,6 +10,7 @@ import * as serverActions from "./store/servers"
 import App from "./App";
 
 import "./index.css";
+import "./mobile.css";
 
 const store = configureStore();
 

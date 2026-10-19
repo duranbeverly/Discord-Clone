@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton";
 import Background2 from "../../assets/discord_home_2.png"
 import './exploreServers.css'
 import JoinServerModal from "../JoinServerModal";
+import { MobileMenuButton } from "../../context/MobileNav";
 export default function ExploreServers() {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -18,7 +19,7 @@ export default function ExploreServers() {
         dispatch(getServersThunk())
     }, [dispatch])
     if (!servers.length) {
-        return <div id="explore-container"></div>
+        return <div id="explore-container"><div className="mobile-topbar"><MobileMenuButton /></div></div>
     }
 
 
@@ -35,6 +36,10 @@ export default function ExploreServers() {
 
     return (
         <div id="explore-container">
+            <div className="mobile-topbar">
+                <MobileMenuButton />
+                <h1 className="top-title">Explore</h1>
+            </div>
             <div className="server-discover-banner">
                 <div className="discover-title-area">
                     <h1 className="discover-title">Find your community</h1>
