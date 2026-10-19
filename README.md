@@ -1,6 +1,6 @@
 # Discordia
 
-**Live demo:** https://discordia-dz4f.onrender.com (use the demo login; the free server can take up to a minute to wake up). Built by a team of four: Beverly Duran, Jay Levin, Melinda Cortez and Benjamin Wilson.
+**Live demo:** https://discordia-nmgn.onrender.com (use the demo login; the free server can take up to a minute to wake up). Built by a team of four: Beverly Duran, Jay Levin, Melinda Cortez and Benjamin Wilson.
 
 ### 2026 update (Beverly's fork)
 - Python 3.12, Flask 2.3 and Flask-SocketIO 5.4 in threading mode (no gevent or eventlet to compile); front end moved from Create React App to **Vite** and React 18.
@@ -20,7 +20,7 @@
 ## Overview
 
 
- * Here is a link to the live demo: https://discordia-dz4f.onrender.com/
+ * Here is a link to the live demo: https://discordia-nmgn.onrender.com/
 
  * This was a collaborative effort between 4 people: Beverly Duran, Jay Levin, Melinda Cortez, and Benjamin Wilson. 
  We had a relatively short amount of time to build out this project and worked closely together to make sure were staying on track. 
