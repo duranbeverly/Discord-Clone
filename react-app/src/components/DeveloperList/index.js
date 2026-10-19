@@ -8,7 +8,7 @@ export default function DeveloperList() {
             <div className="conversation-user-container">
                 <div className="dm-left">
                     <img alt="" className="dm-profile-img"
-                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271951/P2/mel-banner_wjcicw.png"
+                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271951/P2/mel-banner_wjcicw.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
                     />
                     <p className="dm-username">
                         Melinda Cortez
@@ -37,7 +37,7 @@ export default function DeveloperList() {
             <div className="conversation-user-container">
                 <div className="dm-left">
                     <img alt="" className="dm-profile-img"
-                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271970/P2/bev-banner_ocoqn8.png"
+                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271970/P2/bev-banner_ocoqn8.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
                     />
                     <p className="dm-username">
                         Beverly Duran
@@ -66,7 +66,7 @@ export default function DeveloperList() {
             <div className="conversation-user-container">
                 <div className="dm-left">
                     <img alt="" className="dm-profile-img"
-                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271920/P2/jay-banner_kcxgwe.png"
+                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271920/P2/jay-banner_kcxgwe.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
                     />
                     <p className="dm-username">
                         Jay Levin
@@ -95,7 +95,7 @@ export default function DeveloperList() {
             <div className="conversation-user-container">
                 <div className="dm-left">
                     <img alt="" className="dm-profile-img"
-                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271883/P2/ben-banner_vle0nz.png"
+                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271883/P2/ben-banner_vle0nz.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
                     />
                     <p className="dm-username">
                         Benjamin Wilson

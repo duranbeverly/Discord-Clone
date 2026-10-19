@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
+from flask_compress import Compress
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
@@ -48,6 +49,9 @@ Migrate(app, db)
 # Threading mode + simple-websocket: no gevent/eventlet to compile, works on Python 3.12.
 socketio.init_app(app, async_mode='threading')
 
+# gzip/brotli responses (the app bundle and API JSON)
+Compress(app)
+
 # Application Security
 CORS(app)
 
@@ -64,6 +68,14 @@ def https_redirect():
             url = request.url.replace('http://', 'https://', 1)
             code = 301
             return redirect(url, code=code)
+
+
+@app.after_request
+def cache_static_assets(response):
+    # Vite puts a content hash in every file name under /assets, so browsers can keep them for a year.
+    if request.path.startswith('/assets/'):
+        response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+    return response
 
 
 @app.after_request
