@@ -406,10 +406,11 @@ li.top-right-nav {
     flex-direction: column;
   }
 
+  /* stacked developer cards don't fit a fixed 10rem bar, so let the footer flow below the content */
   .footer {
     display: block;
-    bottom: -10rem;
+    position: relative;
+    height: auto;
     z-index: 2;
-    overflow-y: auto;
   }
 }

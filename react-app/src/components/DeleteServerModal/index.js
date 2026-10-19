@@ -52,7 +52,7 @@ function DeleteServerModal({ serverId, serverName }) {
                     />
                 </label>
                 <div className="delete-server-buttons">
-                    <button className="cancel-button" onClick={closeModal}>Cancel</button>
+                    <button type="button" className="cancel-button" onClick={closeModal}>Cancel</button>
                     <button id="delete-button" type="submit">Delete Server</button>
                 </div>
             </form>

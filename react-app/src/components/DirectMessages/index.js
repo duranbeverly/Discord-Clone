@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import FallbackImage from "../FallbackImage";
 import { NavLink, useParams, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { getConversationsThunk, deleteConversationThunk } from "../../store/userconversations"
@@ -11,7 +12,7 @@ export default function DirectMessages() {
     let params = useParams()
     let { conversationId } = params
     useEffect(() => {
-        dispatch(getConversationsThunk()).then(dispatch(getAllUsersThunk())).then(() => setIsLoading(false))
+        Promise.all([dispatch(getConversationsThunk()), dispatch(getAllUsersThunk())]).then(() => setIsLoading(false))
     }, [dispatch])
 
     let userConversations = Object.values(useSelector((state) => state.userConversations))
@@ -63,18 +64,23 @@ export default function DirectMessages() {
                             <NavLink to={`/conversations/${conversation['conversation_id']}`}>
                                 <div className="conversation-user-container">
                                     <div className="dm-left">
-                                        <img alt={`user icon for ${conversation.username}`} className="dm-profile-img" src={conversation.userIcon}
+                                        <FallbackImage alt={`user icon for ${conversation.username}`} className="dm-profile-img" src={conversation.userIcon} name={conversation.username}
                                             // style={conversation.conversation_id == conversationId ? { border: "2px solid white", borderRadius: "15px" } : {}}
                                             // style={conversation.conversation_id == conversationId ? { borderRadius: "15px" } : {}}
                                             style={online ? { border: "2px solid green" } : {}}
-                                        ></img>
+                                        />
                                         <p className="dm-username">{conversation.username}
                                             {online && (<span className="online-status">Online</span>)}
                                         </p>
                                     </div>
                                     <div className="dm-right">
                                         <i id="delete-convo" className="fa-solid fa-xmark"
-                                            onClick={() => deleteConversation(conversation.conversation_id, conversation.userId)}
+                                            onClick={(e) => {
+                                                // the X sits inside the conversation link; don't navigate to the conversation being deleted
+                                                e.preventDefault()
+                                                e.stopPropagation()
+                                                deleteConversation(conversation.conversation_id, conversation.userId)
+                                            }}
 
                                         ></i>
                                     </div>

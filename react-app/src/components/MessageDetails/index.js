@@ -1,4 +1,5 @@
 import React from "react"
+import FallbackImage from "../FallbackImage";
 // import Picker from '@emoji-mart/react'
 // import data from '@emoji-mart/data'
 // import { useSelector } from "react-redux"
@@ -46,7 +47,7 @@ export default function MessageDetails({ message }) {
 
     return (<div className="container-messages" key={message.id}>
         <div className="message-user-img">
-            <img alt="" className="dm-profile-img" src={message.UserInfo.userIcon}></img>
+            <FallbackImage alt="" className="dm-profile-img" src={message.UserInfo.userIcon} name={message.UserInfo.username} />
         </div>
         <div className="message-info">
             <div className="message-user-info">

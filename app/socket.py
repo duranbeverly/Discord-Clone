@@ -20,13 +20,18 @@ online_users = {}
 
 
 @socketio.event
-def connect(): 
+def connect():
+    # only logged-in users get a socket (an anonymous user has no id/status to update)
+    if not current_user.is_authenticated:
+        return False
     current_user.status = "online"
     emit("updateUser", [current_user.id, "online"], broadcast=True)
     db.session.commit()
 
 @socketio.event
-def disconnect(): 
+def disconnect():
+    if not current_user.is_authenticated:
+        return
     current_user.status = "offline"
     emit("updateUser", [current_user.id, "offline"], broadcast=True)
     db.session.commit()

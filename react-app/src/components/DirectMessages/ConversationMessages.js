@@ -54,30 +54,23 @@ export default function ConversationMessages() {
     useEffect(() => {
 
 
-        socket.on("direct_message", (direct_message) => {
-            // when we recieve a chat add to our messages array in our usestate
-            //   setMessages((messages) => [...messages, direct_message]);
+        const onNewMessage = (direct_message) => {
             // updating store
-
             dispatch(getConversationMessagesThunk(direct_message.conversationId));
             dispatch(getConversationsThunk());
-        });
-        socket.on("delete_direct_message", (deleted_message) => {
-            //   setMessages((messages) => {
-            //     return messages.filter((message) => message.id !== deleted_message.id);
-            //   });
-            // dispatch(getConversationsThunk());
-            dispatch(getConversationMessagesThunk(deleted_message.conversationId))
-        });
+        };
+        const refresh = (direct_message) => {
+            dispatch(getConversationMessagesThunk(direct_message.conversationId));
+        };
+        socket.on("direct_message", onNewMessage);
+        socket.on("delete_direct_message", refresh);
+        socket.on("update_direct_message", refresh);
 
-        socket.on("update_direct_message", (update_direct_message) => {
-            dispatch(getConversationMessagesThunk(update_direct_message.conversationId));
-        });
-
-        // when component unmount, disconnect
-
+        // when component unmounts, remove the listeners so they don't pile up
         return () => {
-
+            socket.off("direct_message", onNewMessage);
+            socket.off("delete_direct_message", refresh);
+            socket.off("update_direct_message", refresh);
         };
     }, [dispatch]);
 

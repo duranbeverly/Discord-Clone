@@ -76,10 +76,10 @@ export default function EditChannelModal(props) {
                     </label>
                     <label className="create-server-label">
                         Channel group
-                        <select name="groupName" className="input-area" defaultValue={groupNames[0]} value={groupName} onChange={(e) => setGroupName(e.target.value)}>
+                        <select name="groupName" className="input-area" value={groupName} onChange={(e) => setGroupName(e.target.value)}>
                             {groupNames.map((name) => {
                                 return (
-                                    <option value={name}>{name}</option>
+                                    <option key={name} value={name}>{name}</option>
                                 )
                             })}
                         </select>

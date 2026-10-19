@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import FallbackImage from "../FallbackImage";
 import { NavLink, Redirect, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./Navigation.css";
@@ -36,11 +37,15 @@ function Navigation({ isLoaded }) {
       dispatch(userServersGet(sessionUser.userId))
       dispatch(getConversationsThunk())
       dispatch(getUsersOnlineStatus())
-      socket.connect();
-      socket.on("updateUser", (user) => {
+      const onUpdateUser = (user) => {
         dispatch(userOnlineStatusUpdate(user))
-      })
-      return () => socket.disconnect()
+      }
+      socket.on("updateUser", onUpdateUser)
+      socket.connect();
+      return () => {
+        socket.off("updateUser", onUpdateUser)
+        socket.disconnect()
+      }
     }
   }, [sessionUser, dispatch])
 
@@ -63,7 +68,7 @@ function Navigation({ isLoaded }) {
       <div className="server-nav-bar">
         <div>
           <div className="tooltip" data-tooltip={"Direct Messages"} style={{ paddingBottom: ".3rem", borderBottom: ".1rem solid var(--center-page)" }}>
-            <a href={`/home`} className="dm-anchor-tag" >
+            <NavLink to="/home" className="dm-anchor-tag" >
               <div className="server-icons dm-div" style={conversationId ? { backgroundColor: "var(--main-button-blue)", borderRadius: "15px" } : {}}>
                 <i className="fa-solid fa-gamepad" style={{ color: "var(--text)", fontSize: "1.8rem" }}></i>
                 {/* <img
@@ -72,7 +77,7 @@ function Navigation({ isLoaded }) {
                   onClick={() => history.push(`/conversations/${firstConversation}`)}
                 /> */}
               </div>
-            </a>
+            </NavLink>
           </div>
           {serverList.map((server) => {
 
@@ -83,7 +88,7 @@ function Navigation({ isLoaded }) {
                 data-tooltip={server.name}
               >
                 <NavLink to={`/channels/${server.id}/${server.default_channel_id}`}>
-                  <img alt={`Display icon for ${server.name}`} className="server-icons" src={server.imageUrl}
+                  <FallbackImage kind="server" alt={`Display icon for ${server.name}`} className="server-icons" src={server.imageUrl} name={server.name}
                     style={parseInt(serverId) === server.id ? { border: "2px solid white", borderRadius: "15px" } : {}}
                   />
                 </NavLink>

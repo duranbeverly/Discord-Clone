@@ -1,4 +1,5 @@
 import React from "react"
+import FallbackImage from "../FallbackImage";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux"
 import "./AllServersList.css"
@@ -35,7 +36,7 @@ function AllServersList() {
                     return (
                         <div key={server.id} id="server-container" onClick={() => history.push(`/channels/${server.id}/${server.default_channel_id}`)
                         }>
-                            <img src={server.imageUrl} id="server-list-icon" alt={server.name}></img>
+                            <FallbackImage kind="server" src={server.imageUrl} id="server-list-icon" alt={server.name} name={server.name} />
                             <div id="server-info">
                                 <h3 id="server-list-name">{server.name}</h3>
                                 <p id="user-count">{server.userCount} {server.userCount <= 1 ? "user" : "users"}</p>

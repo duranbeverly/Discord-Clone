@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import "./LoginForm.css";
+import FallbackImage from "../FallbackImage";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -101,21 +102,21 @@ function LoginFormModal() {
             <div className="demo-users">
               <div className="demo-user">
                 <div className="demo-top">
-                  <img className="demo-image" src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1685933711/P2/photo-1685125215121-4291770b4668_oln6ld.jpg" alt="woman"></img>
+                  <FallbackImage className="demo-image" src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1685933711/P2/photo-1685125215121-4291770b4668_oln6ld.jpg" alt="woman" name="Demo User 1" />
                   <h3 className="demo-title">Demo User 1</h3>
                 </div>
                 <button type="button" className="launch-server-button" onClick={demoUser1}>Log in</button>
               </div>
               <div className="demo-user">
                 <div className="demo-top">
-                  <img className="demo-image" src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1685933763/P2/photo-1685118148066-da2c5c61e291_dvdcp0.jpg" alt="man"></img>
+                  <FallbackImage className="demo-image" src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1685933763/P2/photo-1685118148066-da2c5c61e291_dvdcp0.jpg" alt="man" name="Demo User 2" />
                   <h3 className="demo-title">Demo User 2</h3>
                 </div>
                 <button type="button" className="launch-server-button" onClick={demoUser2} >Log in</button>
               </div>
               <div className="demo-user">
                 <div className="demo-top">
-                  <img className="demo-image" src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1685933727/P2/photo-1683646237782-ce1378fbffcb_tnflh3.jpg" alt="woman"></img>
+                  <FallbackImage className="demo-image" src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1685933727/P2/photo-1683646237782-ce1378fbffcb_tnflh3.jpg" alt="woman" name="Demo User 3" />
                   <h3 className="demo-title">Demo User 3</h3>
                 </div>
                 <button type="button" className="launch-server-button" onClick={demoUser3}>Log in</button>

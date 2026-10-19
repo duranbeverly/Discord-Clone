@@ -1,0 +1,49 @@
+.img-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+.img-fallback.img-fallback-banner {
+  width: 17rem;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  font-size: 3rem;
+}
+
+/* Developer cards: the old banner photos are gone, so each developer gets a gradient badge */
+.dev-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  user-select: none;
+  background: var(--dev-gradient);
+}
+
+.dev-mel { --dev-gradient: linear-gradient(135deg, #eb459e, #5865f2); }
+.dev-bev { --dev-gradient: linear-gradient(135deg, #faa61a, #ed4245); }
+.dev-jay { --dev-gradient: linear-gradient(135deg, #3ba55c, #1e88e5); }
+.dev-ben { --dev-gradient: linear-gradient(135deg, #5865f2, #00b0f4); }
+
+.coder-info-wrapper[class*="dev-"] {
+  border-top: 4px solid transparent;
+  background: linear-gradient(var(--modal-input), var(--modal-input)) padding-box,
+    var(--dev-gradient) border-box;
+}

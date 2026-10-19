@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import FallbackImage from "../FallbackImage";
 import OpenModalButton from '../OpenModalButton'
 import * as sessionActions from '../../store/session'
 import { useHistory } from "react-router-dom"
@@ -19,7 +20,7 @@ export default function LogoutNav() {
         <>
             <div className="bottom-nav">
                 <div className="left-nav-bar">
-                    <img alt="Your user icon" className="nav-user-profile-img" src={sessionUser.userIcon} />
+                    <FallbackImage alt="Your user icon" className="nav-user-profile-img" src={sessionUser.userIcon} name={sessionUser.username} />
                     <p className="nav-username">{sessionUser.username}</p>
                 </div>
                 <OpenModalButton

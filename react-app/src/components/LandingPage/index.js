@@ -9,6 +9,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { NavLink } from "react-router-dom";
 import "./LandingPage.css";
+import "../FallbackImage/FallbackImage.css";
 import * as sessionActions from '../../store/session';
 
 export default function LandingPage() {
@@ -68,7 +69,7 @@ export default function LandingPage() {
                             <h1 className="landing-title">This is the Place for You...</h1>
                             <span className="landing-body">
                                 ...Connect, Communicate, Community: Unite and Engage in
-                                Togetherness. we believe in the power of togetherness,
+                                Togetherness. We believe in the power of togetherness,
                                 meaningful conversations, and fostering a vibrant community. Our
                                 platform is designed to bring people closer, allowing them to
                                 belong to various groups, whether it's a school club, a gaming
@@ -108,12 +109,8 @@ export default function LandingPage() {
                                 <h2 className="coder-title">Meet the Developers</h2>
                                 <div className="developer-info-boxes">
                                     <div className="coder-info">
-                                        <div className="coder-info-wrapper">
-                                            <img
-                                                src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271883/P2/ben-banner_vle0nz.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
-                                                className="coder-image"
-                                                alt=""
-                                            ></img>
+                                        <div className="coder-info-wrapper dev-ben">
+                                            <div className="dev-avatar" aria-hidden="true">BW</div>
                                             <div className="coder-info-right">
                                                 <p className="coder-name">Benjamin Wilson</p>
                                                 <div className="coder-contact-info">
@@ -132,19 +129,15 @@ export default function LandingPage() {
                                                         href="https://github.com/BenjaminWilson13"
                                                         rel="noreferrer"
                                                     >
-                                                        Git Hub
+                                                        GitHub
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="coder-info">
-                                        <div className="coder-info-wrapper">
-                                            <img
-                                                className="coder-image"
-                                                src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271951/P2/mel-banner_wjcicw.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
-                                                alt=""
-                                            ></img>
+                                        <div className="coder-info-wrapper dev-mel">
+                                            <div className="dev-avatar" aria-hidden="true">MC</div>
                                             <div className="coder-info-right">
                                                 <p className="coder-name">Melinda Cortez</p>
                                                 <div className="coder-contact-info">
@@ -163,19 +156,15 @@ export default function LandingPage() {
                                                         target="_blank"
                                                         rel="noreferrer"
                                                     >
-                                                        Git Hub
+                                                        GitHub
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="coder-info">
-                                        <div className="coder-info-wrapper">
-                                            <img
-                                                src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271970/P2/bev-banner_ocoqn8.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
-                                                className="coder-image"
-                                                alt=""
-                                            ></img>
+                                        <div className="coder-info-wrapper dev-bev">
+                                            <div className="dev-avatar" aria-hidden="true">BD</div>
                                             <div className="coder-info-right">
                                                 <p className="coder-name">Beverly Duran</p>
                                                 <div className="coder-contact-info">
@@ -194,19 +183,15 @@ export default function LandingPage() {
                                                         href="https://github.com/duranbeverly"
                                                         rel="noreferrer"
                                                     >
-                                                        Git Hub
+                                                        GitHub
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="coder-info">
-                                        <div className="coder-info-wrapper">
-                                            <img
-                                                src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271920/P2/jay-banner_kcxgwe.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
-                                                className="coder-image"
-                                                alt=""
-                                            ></img>
+                                        <div className="coder-info-wrapper dev-jay">
+                                            <div className="dev-avatar" aria-hidden="true">JL</div>
                                             <div className="coder-info-right">
                                                 <p className="coder-name">Jay Levin</p>
                                                 <div className="coder-contact-info">
@@ -225,7 +210,7 @@ export default function LandingPage() {
                                                         href="https://github.com/jaylevin96"
                                                         rel="noreferrer"
                                                     >
-                                                        Git Hub
+                                                        GitHub
                                                     </a>
                                                 </div>
                                             </div>

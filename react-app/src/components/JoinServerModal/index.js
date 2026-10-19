@@ -1,4 +1,5 @@
 import React from "react";
+import FallbackImage from "../FallbackImage";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
@@ -30,7 +31,7 @@ export default function JoinServerModal({ server }) {
             <h1 className="form-title">Join Server</h1>
             <h2 className="image-label server-name">{server.name}</h2>
             <div className="form-box server-image-box">
-                <img alt="" className="sign-up-form-server-img" src={server.imageUrl}></img>
+                <FallbackImage alt="" kind="banner" className="sign-up-form-server-img" src={server.imageUrl} name={server.name} />
             </div>
             <div className="delete-server-buttons">
                 <button id="delete-edit-button" onClick={closeModal}>

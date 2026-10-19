@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import FallbackImage from "../FallbackImage";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getServersThunk } from "../../store/servers";
@@ -37,7 +38,7 @@ export default function ExploreServers() {
             <div className="server-discover-banner">
                 <div className="discover-title-area">
                     <h1 className="discover-title">Find your community</h1>
-                    <p className="discover-motto">From gaming to music, to learning there's a place for you.</p>
+                    <p className="discover-motto">From gaming, to music, to learning, there's a place for you.</p>
                 </div>
                 <img alt="" className="discover-banner-img" src={Background2} />
             </div>
@@ -48,7 +49,7 @@ export default function ExploreServers() {
                     servers.map((server) => {
 
                         return <div key={server.id} className="server-container">
-                            <img alt={`Display icon for ${server.name}`} className="explore-server-image" src={server.imageUrl}></img>
+                            <FallbackImage kind="banner" alt={`Display icon for ${server.name}`} className="explore-server-image" src={server.imageUrl} name={server.name} />
                             <div className="server-container-bottom">
                                 <div className="top-server-info">
                                     <div className="server-username">{displayName(server.name)}</div>

@@ -2,6 +2,7 @@ import React from "react"
 import { useParams } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import "./ServerUserLIst.css";
+import FallbackImage from "../FallbackImage";
 
 export default function ServerUserList() {
     const { serverId } = useParams();
@@ -33,9 +34,9 @@ export default function ServerUserList() {
             <span>Owner</span>
             <div className="conversation-user-container">
                 <div className="dm-left">
-                    <img alt={`User icon for ${allUsers[owner[0]].username}`} className="dm-profile-img" src={allUsers[owner[0]].userIcon}
+                    <FallbackImage alt={`User icon for ${allUsers[owner[0]].username}`} className="dm-profile-img" src={allUsers[owner[0]].userIcon} name={allUsers[owner[0]].username}
                         style={ownerStatus ? { border: "2px solid green" } : {}}
-                    ></img>
+                    />
                     <p className="dm-username">{allUsers[owner[0]].username}
                         {ownerStatus && (<span className="online-status">Online</span>)}
                     </p>
@@ -55,10 +56,10 @@ export default function ServerUserList() {
                 return (
                     <div key={userId} className="conversation-user-container">
                         <div className="dm-left">
-                            <img alt={`User icon for ${allUsers[userId].username}`} className="dm-profile-img" src={allUsers[userId].userIcon}
+                            <FallbackImage alt={`User icon for ${allUsers[userId].username}`} className="dm-profile-img" src={allUsers[userId].userIcon} name={allUsers[userId].username}
                                 style={online ? { border: "2px solid green" } : {}}
 
-                            ></img>
+                            />
                             <p className="dm-username">{allUsers[userId].username}
                                 {online && (<span className="online-status">Online</span>)}
                             </p>
@@ -80,9 +81,9 @@ export default function ServerUserList() {
                 return (
                     <div key={userId} className="conversation-user-container">
                         <div className="dm-left">
-                            <img alt={`User icon for ${allUsers[userId].username}`} className="dm-profile-img" src={allUsers[userId].userIcon}
+                            <FallbackImage alt={`User icon for ${allUsers[userId].username}`} className="dm-profile-img" src={allUsers[userId].userIcon} name={allUsers[userId].username}
                                 style={online ? { border: "2px solid green" } : {}}
-                            ></img>
+                            />
                             <p className="dm-username">{allUsers[userId].username}
                                 {online && (<span className="online-status">Online</span>)}
                             </p>

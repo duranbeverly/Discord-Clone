@@ -73,7 +73,7 @@ function EditUserIcon() {
                 </label>
                 <label className="create-server-label">
                     Username
-                    <input type="test"
+                    <input type="text"
                         value={username}
                         className="input-area"
                         onChange={(e) => setUsername(e.target.value)}

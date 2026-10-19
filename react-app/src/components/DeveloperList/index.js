@@ -1,5 +1,6 @@
 import React from "react"
 import "../ServerUserList/ServerUserLIst.css"
+import "../FallbackImage/FallbackImage.css"
 
 export default function DeveloperList() {
     return (
@@ -7,9 +8,7 @@ export default function DeveloperList() {
             <span>Developers</span>
             <div className="conversation-user-container">
                 <div className="dm-left">
-                    <img alt="" className="dm-profile-img"
-                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271951/P2/mel-banner_wjcicw.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
-                    />
+                    <div className="dev-avatar dev-mel" aria-hidden="true">MC</div>
                     <p className="dm-username">
                         Melinda Cortez
                         <span className="online-status coder-contact-info">
@@ -28,7 +27,7 @@ export default function DeveloperList() {
                                 href="https://github.com/Solita43"
                                 rel="noreferrer"
                             >
-                                Git Hub
+                                GitHub
                             </a>
                         </span>
                     </p>
@@ -36,9 +35,7 @@ export default function DeveloperList() {
             </div>
             <div className="conversation-user-container">
                 <div className="dm-left">
-                    <img alt="" className="dm-profile-img"
-                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271970/P2/bev-banner_ocoqn8.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
-                    />
+                    <div className="dev-avatar dev-bev" aria-hidden="true">BD</div>
                     <p className="dm-username">
                         Beverly Duran
                         <span className="online-status coder-contact-info">
@@ -57,7 +54,7 @@ export default function DeveloperList() {
                                 href="https://github.com/duranbeverly"
                                 rel="noreferrer"
                             >
-                                Git Hub
+                                GitHub
                             </a>
                         </span>
                     </p>
@@ -65,9 +62,7 @@ export default function DeveloperList() {
             </div>
             <div className="conversation-user-container">
                 <div className="dm-left">
-                    <img alt="" className="dm-profile-img"
-                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271920/P2/jay-banner_kcxgwe.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
-                    />
+                    <div className="dev-avatar dev-jay" aria-hidden="true">JL</div>
                     <p className="dm-username">
                         Jay Levin
                         <span className="online-status coder-contact-info">
@@ -86,7 +81,7 @@ export default function DeveloperList() {
                                 href="https://github.com/jaylevin96"
                                 rel="noreferrer"
                             >
-                                Git Hub
+                                GitHub
                             </a>
                         </span>
                     </p>
@@ -94,9 +89,7 @@ export default function DeveloperList() {
             </div>
             <div className="conversation-user-container">
                 <div className="dm-left">
-                    <img alt="" className="dm-profile-img"
-                        src="https://res.cloudinary.com/dnzxq7dgk/image/upload/v1686271883/P2/ben-banner_vle0nz.png" loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }}
-                    />
+                    <div className="dev-avatar dev-ben" aria-hidden="true">BW</div>
                     <p className="dm-username">
                         Benjamin Wilson
                         <span className="online-status coder-contact-info">
@@ -115,7 +108,7 @@ export default function DeveloperList() {
                                 href="https://github.com/BenjaminWilson13"
                                 rel="noreferrer"
                             >
-                                Git Hub
+                                GitHub
                             </a>
                         </span>
                     </p>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FallbackImage from "../FallbackImage";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,8 +19,12 @@ export default function CreateConversationModal({ users }) {
         let user = users.find(user => user.username === username)
         e.preventDefault();
         dispatch(createNewConversationThunk(username)).then(data => {
-            if (data.errors) {
-                setErrors(data.errors)
+            if (!data || data.errors) {
+                setErrors((data && data.errors) || "Something went wrong, please try again")
+                return
+            }
+            if (!user || !data[user.userId]) {
+                setErrors("Pick a user from the list to start a conversation")
                 return
             }
             const { conversation_id } = data[user.userId]
@@ -79,23 +84,22 @@ export default function CreateConversationModal({ users }) {
                                 online = true
                             }
                             return (
-                                <div className="users-list">
+                                <div className="users-list" key={user.userId}>
                                     <label className="create-convo-label">
                                         <div className="user-list-details">
 
                                             <div>
 
 
-                                                <img alt='user icon' className="dm-profile-img" src={user.userIcon}
+                                                <FallbackImage alt='user icon' className="dm-profile-img" src={user.userIcon} name={user.username}
                                                     style={online ? { border: "2px solid green" } : {}}
-                                                ></img>
+                                                />
                                                 <p className="dm-username">
                                                     {user.username}
                                                     {online && (<span className="online-status">Online</span>)}
                                                 </p>
                                             </div>
                                             <input type="checkbox" className="create-convo-checkbox" value={user.username}
-                                                key={user.userId}
                                                 onChange={(e) => {
                                                     if (username === e.target.value) {
                                                         setUsername('')

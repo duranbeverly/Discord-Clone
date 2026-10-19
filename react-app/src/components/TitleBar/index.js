@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import FallbackImage from "../FallbackImage";
 import "./TitleBar.css"
 import DropDownButton from "../DropDownButton";
 import { useParams } from "react-router-dom";
@@ -39,10 +40,10 @@ function TitleBar({ title, users }) {
         <div className="top-bar">
             <DropDownButton serverId={serverId} title={title} users={users} />
             <div id="channel-top-title">
-                {conversation ? (<img alt="" className="title-profile-img" src={conversation.userIcon}
+                {conversation ? (<FallbackImage alt="" className="title-profile-img" src={conversation.userIcon} name={conversation.username}
                     style={online ? { border: "2px solid green" } : {}}
 
-                ></img>) : <i className="fa-solid fa-hashtag title-icon"></i>}
+                />) : <i className="fa-solid fa-hashtag title-icon"></i>}
                 <h1 className="top-title">{header}</h1>
             </div>
         </div>

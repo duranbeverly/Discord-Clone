@@ -49,25 +49,20 @@ export default function ChannelMessages() {
 
   useEffect(() => {
 
-    socket.on("channel_message", (channel_message) => {
-      //   if (channelId == channel_message.channelId) {
-      //     setMessages((messages) => [...messages, channel_message]);
-      //   }
-      let channelId = channel_message.channelId
-      dispatch(getChannelMessagesThunk(channelId));
-    });
-    socket.on("delete_channel_message", (deleted_message) => {
-      //   setMessages((messages) => {
-      //     return messages.filter((message) => message.id !== deleted_message.id);
-      //   });
-      let channelId = deleted_message.channelId
-      dispatch(getChannelMessagesThunk(channelId));
-    });
+    // any new, edited or deleted message: refresh that channel's messages
+    const refresh = (channel_message) => {
+      dispatch(getChannelMessagesThunk(channel_message.channelId));
+    };
+    socket.on("channel_message", refresh);
+    socket.on("delete_channel_message", refresh);
+    socket.on("update_channel_message", refresh);
 
-    socket.on("update_channel_message", (channel_message) => {
-      let channelId = channel_message.channelId
-      dispatch(getChannelMessagesThunk(channelId));
-    });
+    // remove the listeners on unmount so they don't pile up every time a channel is opened
+    return () => {
+      socket.off("channel_message", refresh);
+      socket.off("delete_channel_message", refresh);
+      socket.off("update_channel_message", refresh);
+    };
   }, [dispatch]);
 
   const handleEnter = (e) => {
