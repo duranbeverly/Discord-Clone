@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useModal } from "../../context/Modal";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewConversationThunk } from "../../store/userconversations";
 

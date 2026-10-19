@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -13,7 +13,7 @@ import "./index.css";
 
 const store = configureStore();
 
-if (process.env.NODE_ENV !== "production") {
+if (import.meta.env.DEV) {
 	window.store = store;
 	window.sessionActions = sessionActions;
 	window.serverActions = serverActions;
@@ -39,9 +39,8 @@ function Root() {
 	);
 }
 
-ReactDOM.render(
-	<React.StrictMode>
+createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
 		<Root />
-	</React.StrictMode>,
-	document.getElementById("root")
+	</React.StrictMode>
 );

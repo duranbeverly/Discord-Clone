@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./TitleBar.css"
 import DropDownButton from "../DropDownButton";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function TitleBar({ title, users }) {

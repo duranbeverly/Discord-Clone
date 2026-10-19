@@ -51,7 +51,7 @@ def seed_direct_message_conversation_users():
 
 def undo_direct_message_conversation_users():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.direct_message_conversation_users RESTART IDENTITY CASCADE;")
+        db.session.execute(text(f"TRUNCATE table {SCHEMA}.direct_message_conversation_users RESTART IDENTITY CASCADE;"))
     else:
         db.session.execute(text("DELETE FROM direct_message_conversation_users"))
 

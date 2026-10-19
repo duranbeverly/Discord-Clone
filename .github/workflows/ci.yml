@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-smoke-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      FLASK_APP: app
+      FLASK_ENV: production
+      SCHEMA: discordia_schema
+      SECRET_KEY: ci-only-secret
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install
+        run: |
+          pip install -r requirements.txt
+          npm install --prefix react-app
+      - name: Build the frontend
+        run: npm run build --prefix react-app
+      - name: Migrate and seed
+        run: |
+          flask db upgrade
+          flask seed all
+      - name: Start the server
+        run: |
+          gunicorn -w 1 --threads 20 app:app --bind 127.0.0.1:8000 > server.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf localhost:8000/ > /dev/null && break; sleep 1; done
+      - name: Smoke test
+        run: curl -sf localhost:8000/ | grep -q '<div id="root">'
+      - name: Demo login and servers list
+        run: |
+          curl -s -c jar -b jar localhost:8000/ > /dev/null
+          curl -sf -c jar -b jar -H "Content-Type: application/json" \
+            -d '{"email":"demo@aa.io","password":"password"}' localhost:8000/api/auth/login | grep -q '"email"'
+          curl -sf -c jar -b jar localhost:8000/api/servers/ | python -c "import sys,json; n=len(json.load(sys.stdin)['servers']); print(n,'servers'); sys.exit(0 if n else 1)"
+      - name: Server log
+        if: always()
+        run: cat server.log || true

@@ -36,7 +36,7 @@ def seed_servers():
 
 def undo_servers():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.servers RESTART IDENTITY CASCADE;")
+        db.session.execute(text(f"TRUNCATE table {SCHEMA}.servers RESTART IDENTITY CASCADE;"))
     else:
         db.session.execute(text("DELETE FROM servers"))
 

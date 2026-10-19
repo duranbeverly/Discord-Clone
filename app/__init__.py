@@ -48,7 +48,8 @@ db.init_app(app)
 Migrate(app, db)
 
 # initialize the app with the socket instance
-socketio.init_app(app, async_mode='gevent')
+# Threading mode + simple-websocket: no gevent/eventlet to compile, works on Python 3.12.
+socketio.init_app(app, async_mode='threading')
 
 # Application Security
 CORS(app)
@@ -101,7 +102,7 @@ def react_root(path):
     or index.html requests
     """
     if path == 'favicon.ico':
-        return app.send_from_directory('public', 'favicon.ico')
+        return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
 
 

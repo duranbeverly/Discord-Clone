@@ -1,5 +1,12 @@
 # Discordia
 
+**Live demo:** https://discordia-dz4f.onrender.com (use the demo login; the free server can take up to a minute to wake up). Built by a team of four: Beverly Duran, Jay Levin, Melinda Cortez and Benjamin Wilson.
+
+### 2026 update (Beverly's fork)
+- Python 3.12, Flask 2.3 and Flask-SocketIO 5.4 in threading mode (no gevent or eventlet to compile); front end moved from Create React App to **Vite** and React 18.
+- Continuous integration on GitHub Actions: builds, migrates and seeds a real Postgres database, then checks the home page, the demo login and the servers list on every push.
+- One-click deploy with `render.yaml` (Render free web service + Neon free Postgres). Image uploads use S3 only when `S3_BUCKET` is set.
+
 ## Table of Contents
 
 - [Discordia](#discordia)

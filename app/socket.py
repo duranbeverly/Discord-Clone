@@ -14,7 +14,7 @@ else:
     origins = "*"
 
 # create your socketIO instance
-socketio = SocketIO(cors_allowed_origin=origins)
+socketio = SocketIO(cors_allowed_origins=origins)
 
 online_users = {}
 
